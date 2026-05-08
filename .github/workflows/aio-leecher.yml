@@ -1,17 +1,25 @@
-name: aio-leecher
+name: leecher
 
 on:
   workflow_dispatch:
     inputs:
       url:
         description: >
-          Enter one or more URLs (newlines, commas, or spaces) with optional arguments.
-          Arguments:  `v` (video) or `a` (audio) followed by quality:
-            Video: `max` | `min` | height (e.g. 480, 720, 1080, 4k) [optional fps e.g. `1080 30`]
-            Audio: `max` | `min` | bitrate in kbps (e.g. 128, 192, 320)
-          yt-dlp supports 1800+ sites, including: YouTube, Vimeo, Twitch, Dailymotion, TikTok,
-          SoundCloud, Bandcamp, Twitter/X, Instagram, Facebook, reddit, Odnoklassniki, Rumble,
-          Bilibili, NicoNico, and many more general/extractor sites.
+          Enter one or more URLs (newlines, commas, or spaces) with optional shortcuts or raw yt-dlp arguments.
+
+          --- Shortcut mode ---
+            Arguments: `v` (video) or `a` (audio) followed by quality:
+              Video: `max` | `min` | height (e.g. 480, 720, 1080, 4k) [optional fps e.g. `1080 30`]
+              Audio: `max` | `min` | bitrate in kbps (e.g. 128, 192, 320)
+            Examples:
+              https://www.youtube.com/watch?v=dfdXGw1xY9A v 1080
+              https://soundcloud.com/artist/track a 320
+
+          --- Raw yt-dlp mode ---
+            Use `--` after the URL, then any official yt-dlp options.
+            Examples:
+              https://example.com/video -- --format bestvideo[height<=1080]+bestaudio --write-subs
+              https://www.youtube.com/watch?v=dQw4w9WgXcQ -- --format "best[height<=720]" --sub-lang en
         required: true
 
 jobs:
@@ -26,17 +34,15 @@ jobs:
           persist-credentials: true
 
       # ── Parse all entries into a JSON array ─────────────────
-      - name: Parse all entries (multiple URLs/args)
+      - name: Parse all entries
         id: parse_entries
         run: |
           INPUT="${{ github.event.inputs.url }}"
-          # Replace commas with newlines to normalise delimiters
           MODIFIED=$(echo "$INPUT" | tr ',' '\n')
           ENTRIES='[]'
           while IFS= read -r line; do
-            line=$(echo "$line" | xargs)  # trim
+            line=$(echo "$line" | xargs)
             [ -z "$line" ] && continue
-            # Split line into tokens
             tokens=($line)
             i=0
             while [ $i -lt ${#tokens[@]} ]; do
@@ -44,8 +50,9 @@ jobs:
               if [[ "$token" =~ ^https?:// ]]; then
                 link="$token"
                 args=()
+                raw=false
                 i=$((i+1))
-                # Collect everything until the next URL or end
+                # Collect tokens until next URL or end
                 while [ $i -lt ${#tokens[@]} ]; do
                   next="${tokens[$i]}"
                   if [[ "$next" =~ ^https?:// ]]; then
@@ -54,18 +61,21 @@ jobs:
                   args+=("$next")
                   i=$((i+1))
                 done
-                # Build JSON entry
+                # Check if first arg is '--'    -> raw mode
+                if [ "${args[0]}" = "--" ]; then
+                  raw=true
+                  args=( "${args[@]:1}" )   # remove the flag itself
+                fi
                 args_json=$(printf '%s\n' "${args[@]}" | jq -R . | jq -s .)
-                entry=$(jq -n --arg link "$link" --argjson args "$args_json" '{link: $link, args: $args}')
+                entry=$(jq -n --arg link "$link" --argjson args "$args_json" --argjson raw "$raw" '{link: $link, args: $args, raw: $raw}')
                 ENTRIES=$(echo "$ENTRIES" | jq ". + [$entry]")
               else
-                # Token that is not a URL – skip it (malformed line)
+                # Token is not a URL – skip it
                 i=$((i+1))
               fi
             done
           done <<< "$MODIFIED"
 
-          # Compact JSON for GitHub Actions output
           ENTRIES_JSON=$(echo "$ENTRIES" | jq -c .)
           echo "ENTRIES_JSON=$ENTRIES_JSON" >> $GITHUB_OUTPUT
           echo "Parsed $(echo "$ENTRIES" | jq length) entries"
@@ -97,16 +107,16 @@ jobs:
         run: |
           set -e
           ENTRIES_JSON='${{ steps.parse_entries.outputs.ENTRIES_JSON }}'
-          YT_DLP_ARGS="--js-runtimes deno --remote-components ejs:npm --no-progress"
+          BASE_YT_DLP_ARGS="--js-runtimes deno --remote-components ejs:npm"
           mkdir -p leecher-content leecher
 
-          # ── Helper: progress display (same as original) ──
+          # ── Helper: progress display (used only in shortcut mode) ──
           download_with_progress() {
             local yt_args="$1"
             local output_template="$2"
             local total_size="$3"
             local url="$4"
-            yt-dlp $yt_args -o "$output_template" "$url" &
+            yt-dlp $BASE_YT_DLP_ARGS --no-progress $yt_args -o "$output_template" "$url" &
             local dl_pid=$!
             local output_dir="$(dirname "$output_template")"
             sleep 1
@@ -133,134 +143,142 @@ jobs:
             fi
           }
 
-          # ── Loop over entries ─────────────────────────────
           count=$(echo "$ENTRIES_JSON" | jq length)
           for ((idx=0; idx<count; idx++)); do
             entry=$(echo "$ENTRIES_JSON" | jq ".[$idx]")
             link=$(echo "$entry" | jq -r '.link')
+            raw=$(echo "$entry" | jq -r '.raw')
             args_len=$(echo "$entry" | jq '.args | length')
 
-            # Default arguments
-            type="v"
-            val1="max"
-            val2=""
-            if [ "$args_len" -ge 1 ]; then
-              type=$(echo "$entry" | jq -r '.args[0]')
-            fi
-            if [ "$args_len" -ge 2 ]; then
-              val1=$(echo "$entry" | jq -r '.args[1]')
-            fi
-            if [ "$args_len" -ge 3 ]; then
-              val2=$(echo "$entry" | jq -r '.args[2]')
-            fi
-
-            # Normalise type and value
-            if [[ "$type" != "v" && "$type" != "a" ]]; then
-              echo "Invalid type '$type' – defaulting to v(ideo) max"
-              type="v"; val1="max"; val2=""
-            fi
-            if [ "$type" = "v" ]; then
-              case "$val1" in
-                2k) val1=1440 ;;
-                4k) val1=2160 ;;
-              esac
-            fi
-
             echo "----------------------------------------"
-            echo "Processing entry $((idx+1))/$count: $link  ($type $val1 $val2)"
+            echo "Processing entry $((idx+1))/$count: $link"
 
-            # ── ALL links are processed by yt-dlp ──────────
-            # Get metadata
-            video_json=$(yt-dlp $YT_DLP_ARGS -j "$link") || {
-              echo "ERROR: yt-dlp failed to fetch metadata, skipping."
-              continue
-            }
-
-            if [ "$type" = "v" ]; then
-              combined=$(echo "$video_json" | jq '[.formats[] | select(.vcodec != "none" and .acodec != "none")]')
-              if [ "$(echo "$combined" | jq length)" -eq 0 ]; then
-                echo "ERROR: No combined video+audio formats, skipping."
+            if [ "$raw" = "true" ]; then
+              # ── Raw yt-dlp mode: pass arguments directly ──
+              readarray -t raw_args < <(echo "$entry" | jq -r '.args[]')
+              echo "→ Running raw yt-dlp command with: ${raw_args[*]}"
+              output_template="leecher-content/%(title)s.%(ext)s"
+              yt-dlp $BASE_YT_DLP_ARGS "${raw_args[@]}" -o "$output_template" "$link" || {
+                echo "Raw yt-dlp download failed, skipping."
                 continue
+              }
+            else
+              # ── Shortcut mode (v / a) ─────────────────────
+              type="v"
+              val1="max"
+              val2=""
+              if [ "$args_len" -ge 1 ]; then
+                type=$(echo "$entry" | jq -r '.args[0]')
+              fi
+              if [ "$args_len" -ge 2 ]; then
+                val1=$(echo "$entry" | jq -r '.args[1]')
+              fi
+              if [ "$args_len" -ge 3 ]; then
+                val2=$(echo "$entry" | jq -r '.args[2]')
               fi
 
-              case "$val1" in
-                max)
-                  format_id=$(echo "$combined" | jq -r 'max_by(.height, .fps) | .format_id') ;;
-                min)
-                  format_id=$(echo "$combined" | jq -r 'min_by(.height, .fps) | .format_id') ;;
-                *)
-                  height="$val1"; fps="${val2:-0}"
-                  heights=$(echo "$combined" | jq '[.[].height] | unique | sort')
-                  chosen_height=$(echo "$heights" | jq --argjson h "$height" 'map({h:., d:(. - $h | abs)}) | sort_by(.d, .h) | first.h')
-                  matching=$(echo "$combined" | jq --argjson h "$chosen_height" 'map(select(.height == $h))')
-                  if [ "$fps" -gt 0 ]; then
-                    exact=$(echo "$matching" | jq --argjson f "$fps" 'map(select(.fps == $f))')
-                    if [ "$(echo "$exact" | jq length)" -gt 0 ]; then
-                      format_id=$(echo "$exact" | jq -r 'first.format_id')
+              if [[ "$type" != "v" && "$type" != "a" ]]; then
+                echo "Invalid type '$type' – defaulting to v(ideo) max"
+                type="v"; val1="max"; val2=""
+              fi
+              if [ "$type" = "v" ]; then
+                case "$val1" in
+                  2k) val1=1440 ;;
+                  4k) val1=2160 ;;
+                esac
+              fi
+
+              echo "→ Shortcut: $type $val1 $val2"
+
+              video_json=$(yt-dlp $BASE_YT_DLP_ARGS -j "$link") || {
+                echo "ERROR: yt-dlp failed to fetch metadata, skipping."
+                continue
+              }
+
+              if [ "$type" = "v" ]; then
+                combined=$(echo "$video_json" | jq '[.formats[] | select(.vcodec != "none" and .acodec != "none")]')
+                if [ "$(echo "$combined" | jq length)" -eq 0 ]; then
+                  echo "ERROR: No combined video+audio formats, skipping."
+                  continue
+                fi
+
+                case "$val1" in
+                  max)
+                    format_id=$(echo "$combined" | jq -r 'max_by(.height, .fps) | .format_id') ;;
+                  min)
+                    format_id=$(echo "$combined" | jq -r 'min_by(.height, .fps) | .format_id') ;;
+                  *)
+                    height="$val1"; fps="${val2:-0}"
+                    heights=$(echo "$combined" | jq '[.[].height] | unique | sort')
+                    chosen_height=$(echo "$heights" | jq --argjson h "$height" 'map({h:., d:(. - $h | abs)}) | sort_by(.d, .h) | first.h')
+                    matching=$(echo "$combined" | jq --argjson h "$chosen_height" 'map(select(.height == $h))')
+                    if [ "$fps" -gt 0 ]; then
+                      exact=$(echo "$matching" | jq --argjson f "$fps" 'map(select(.fps == $f))')
+                      if [ "$(echo "$exact" | jq length)" -gt 0 ]; then
+                        format_id=$(echo "$exact" | jq -r 'first.format_id')
+                      else
+                        format_id=$(echo "$matching" | jq -r 'max_by(.fps) | .format_id')
+                      fi
                     else
                       format_id=$(echo "$matching" | jq -r 'max_by(.fps) | .format_id')
                     fi
-                  else
-                    format_id=$(echo "$matching" | jq -r 'max_by(.fps) | .format_id')
-                  fi
-                  ;;
-              esac
+                    ;;
+                esac
 
-              total_size=$(echo "$video_json" | jq -r ".formats[] | select(.format_id == \"$format_id\") | .filesize // .filesize_approx // 0")
-              height_info=$(echo "$video_json" | jq -r ".formats[] | select(.format_id == \"$format_id\") | .height // 0")
-              fps_info=$(echo "$video_json" | jq -r ".formats[] | select(.format_id == \"$format_id\") | .fps // 0")
+                total_size=$(echo "$video_json" | jq -r ".formats[] | select(.format_id == \"$format_id\") | .filesize // .filesize_approx // 0")
+                height_info=$(echo "$video_json" | jq -r ".formats[] | select(.format_id == \"$format_id\") | .height // 0")
+                fps_info=$(echo "$video_json" | jq -r ".formats[] | select(.format_id == \"$format_id\") | .fps // 0")
 
-              # Unique filename using height & FPS
-              output_template="leecher-content/%(title)s-${height_info}p-${fps_info}fps.%(ext)s"
-              echo "Downloading video format $format_id → $output_template"
-              if ! download_with_progress "$YT_DLP_ARGS -f $format_id" "$output_template" "$total_size" "$link"; then
-                echo "Download failed, skipping remux."
-                continue
+                output_template="leecher-content/%(title)s-${height_info}p-${fps_info}fps.%(ext)s"
+                echo "Downloading video format $format_id → $output_template"
+                if ! download_with_progress "-f $format_id" "$output_template" "$total_size" "$link"; then
+                  echo "Download failed, skipping remux."
+                  continue
+                fi
+
+                echo "Remuxing..."
+                cd leecher-content
+                input_file=$(ls -1t *${height_info}p_${fps_info}fps.* 2>/dev/null | head -n1)
+                if [ -n "$input_file" ]; then
+                  remuxed="remuxed_${input_file}"
+                  ffmpeg -i "$input_file" -c copy "$remuxed" -y && {
+                    rm "$input_file"
+                    mv "$remuxed" "$input_file"
+                    echo "Remux successful."
+                  } || echo "Remux failed, original file kept."
+                fi
+                cd ..
+
+              elif [ "$type" = "a" ]; then
+                audio_formats=$(echo "$video_json" | jq '[.formats[] | select(.vcodec == "none" and .acodec != "none")]')
+                if [ "$(echo "$audio_formats" | jq length)" -eq 0 ]; then
+                  echo "ERROR: No audio-only formats, skipping."
+                  continue
+                fi
+
+                case "$val1" in
+                  max)
+                    format_id=$(echo "$audio_formats" | jq -r 'max_by(.abr // .tbr) | .format_id') ;;
+                  min)
+                    format_id=$(echo "$audio_formats" | jq -r 'min_by(.abr // .tbr) | .format_id') ;;
+                  *)
+                    bitrate="$val1"
+                    bitrates=$(echo "$audio_formats" | jq '[.[].abr // .tbr] | unique | sort')
+                    chosen_bitrate=$(echo "$bitrates" | jq --argjson b "$bitrate" 'map({br:., d:(. - $b | abs)}) | sort_by(.d, .br) | first.br')
+                    format_id=$(echo "$audio_formats" | jq -r --argjson br "$chosen_bitrate" 'map(select((.abr // .tbr) == $br)) | first.format_id')
+                    ;;
+                esac
+
+                total_size=$(echo "$video_json" | jq -r ".formats[] | select(.format_id == \"$format_id\") | .filesize // .filesize_approx // 0")
+                abr_info=$(echo "$video_json" | jq -r ".formats[] | select(.format_id == \"$format_id\") | .abr // .tbr // 0")
+
+                output_template="leecher-content/%(title)s-${abr_info}kbps.%(ext)s"
+                echo "Downloading audio format $format_id → $output_template"
+                download_with_progress "-f $format_id" "$output_template" "$total_size" "$link" || {
+                  echo "Audio download failed, skipping."
+                  continue
+                }
               fi
-
-              # Remux
-              echo "Remuxing..."
-              cd leecher-content
-              input_file=$(ls -1t *${height_info}p_${fps_info}fps.* 2>/dev/null | head -n1)
-              if [ -n "$input_file" ]; then
-                remuxed="remuxed_${input_file}"
-                ffmpeg -i "$input_file" -c copy "$remuxed" -y && {
-                  rm "$input_file"
-                  mv "$remuxed" "$input_file"
-                  echo "Remux successful."
-                } || echo "Remux failed, original file kept."
-              fi
-              cd ..
-
-            elif [ "$type" = "a" ]; then
-              audio_formats=$(echo "$video_json" | jq '[.formats[] | select(.vcodec == "none" and .acodec != "none")]')
-              if [ "$(echo "$audio_formats" | jq length)" -eq 0 ]; then
-                echo "ERROR: No audio-only formats, skipping."
-                continue
-              fi
-
-              case "$val1" in
-                max)
-                  format_id=$(echo "$audio_formats" | jq -r 'max_by(.abr // .tbr) | .format_id') ;;
-                min)
-                  format_id=$(echo "$audio_formats" | jq -r 'min_by(.abr // .tbr) | .format_id') ;;
-                *)
-                  bitrate="$val1"
-                  bitrates=$(echo "$audio_formats" | jq '[.[].abr // .tbr] | unique | sort')
-                  chosen_bitrate=$(echo "$bitrates" | jq --argjson b "$bitrate" 'map({br:., d:(. - $b | abs)}) | sort_by(.d, .br) | first.br')
-                  format_id=$(echo "$audio_formats" | jq -r --argjson br "$chosen_bitrate" 'map(select((.abr // .tbr) == $br)) | first.format_id')
-                  ;;
-              esac
-
-              total_size=$(echo "$video_json" | jq -r ".formats[] | select(.format_id == \"$format_id\") | .filesize // .filesize_approx // 0")
-              abr_info=$(echo "$video_json" | jq -r ".formats[] | select(.format_id == \"$format_id\") | .abr // .tbr // 0")
-
-              output_template="leecher-content/%(title)s-${abr_info}kbps.%(ext)s"
-              echo "Downloading audio format $format_id → $output_template"
-              download_with_progress "$YT_DLP_ARGS -f $format_id" "$output_template" "$total_size" "$link" || {
-                echo "Audio download failed, skipping."
-                continue
-              }
             fi
           done
 
@@ -271,7 +289,6 @@ jobs:
           for file in *; do
             if [ -f "$file" ]; then
               echo "→ Zipping $file"
-              # -j : junk (strip) path, so file is added directly to the root of the ZIP
               zip -j -s 99m -r "../leecher/${file}.zip" "$file"
             fi
           done
