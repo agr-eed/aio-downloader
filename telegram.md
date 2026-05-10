@@ -7,6 +7,258 @@
 <!-- MSG START -->
 
 ---
+📅 بروزرسانی: 1405/02/20 23:42
+---
+
+## VahidOOnLine — post 239379
+
+<div align="center">
+  <img src="telegram/content/VahidOOnLine_239379_1778443956.jpg" alt="Photo">
+</div>
+<div dir='rtl' style='font-family: "Vazirmatn", Tahoma, sans-serif;'>
+♦️روزنامه وال‌استریت ژورنال، شامگاه یکشنبه ۲۰ اردیبهشت ماه، به نقل از منابعی آگاه، جزئیاتی از پاسخ ایران به پیشنهاد صلح آمریکا را منتشر کرد.
+به گزارش این روزنامه، پاسخ ایران که از طریق پاکستان به‌عنوان میانجی به واشنگتن منتقل شده، همچنان اختلاف‌های مهمی میان دو طرف باقی گذاشته است.
+به گفته منابع وال‌استریت ژورنال، تهران حاضر نشده از پیش درباره سرنوشت برنامه هسته‌ای خود و ذخایر اورانیوم با غنای بالا تعهد بدهد. ایران پیشنهاد کرده مسائل هسته‌ای طی ۳۰ روز آینده مورد مذاکره قرار گیرد. مقامام‌های ایران همچنین برای رقیق‌سازی بخشی از اورانیوم غنی‌شده و انتقال بخش دیگری از آن به یک کشور ثالث اعلام آمادگی کرده‌اند.
+وال‌استریت ژورنال گزارش داد تهران با برچیدن تاسیسات هسته‌ای خود مخالفت کرده، اما در عین حال آمادگی‌اش را برای تعلیق غنی‌سازی اورانیوم اعلام کرده است؛ تعلیقی که به گفته این روزنامه، مدت آن کوتاه‌تر از توقف ۲۰ ساله پیشنهادی آمریکا خواهد بود.
+بر اساس این گزارش، ایران در پاسخی چندصفحه‌ای به تازه‌ترین پیشنهاد آمریکا برای پایان دادن به جنگ، خواستار پایان درگیری‌ها و لغو محاصره کشتی‌ها و بنادر ایرانی شده و پیشنهاد داده است تنگه هرمز به‌تدریج به روی رفت‌وآمد تجاری باز شود.
+وال‌استریت ژورنال نوشت ایران در مقابل، خواستار تضمین‌هایی شده است که اگر مذاکرات شکست بخورد یا آمریکا در آینده از توافق خارج شود، اورانیوم منتقل‌شده دوباره به ایران بازگردانده شود.
+‌🇸🇦 Indypersian
+
+🤖 @VahidOOnLine
+</div>
+
+## VahidOOnLine — post 239378
+
+<div align="center">
+  <img src="telegram/content/VahidOOnLine_239378_1778443956.jpg" alt="Photo">
+</div>
+<div dir='rtl' style='font-family: "Vazirmatn", Tahoma, sans-serif;'>
+رسانه‌های ایران شامگاه یک‌شنبه با اشاره به شنیده شدن فعالیت پدافند هوایی در اندیمشک و شمال دزفول از سرنگونی «پرنده متخاصم دشمن» در اندیمشک خبر دادند.
+
+شهروندان نیز یک‌شنبه ساعت حدود ۱۰ شب از شنیده‌شدن صدای پدافند در این شهر خبر دادند.
+‌🏁 🇬🇧 IranintlTV
+
+🤖 @VahidOOnLine
+</div>
+
+## VahidOOnLine — post 239377
+
+<div align="center">
+  <a href="telegram/content/VahidOOnLine_239377_1778443957.mp4" target="_blank">🎬 Download video</a>
+</div>
+<div dir='rtl' style='font-family: "Vazirmatn", Tahoma, sans-serif;'>
+روزنامه وال‌استریت ژورنال گزارش داد جمهوری اسلامی پیشنهاد داده بخشی از ذخایر اورانیوم غنی‌شده خود را رقیق و بخش دیگر را به یک کشور ثالث منتقل کند.
+
+بر اساس این گزارش، تهران همچنین خواستار تضمین شده است که در صورت شکست مذاکرات یا خروج دوباره آمریکا از توافق، اورانیوم منتقل‌شده به خاک ایران بازگردانده شود.
+
+به نوشته وال‌استریت ژورنال، این پیشنهاد بخشی از پاسخ چندصفحه‌ای جمهوری اسلامی به طرح اخیر آمریکا برای پایان دادن به جنگ و آغاز مذاکرات جدید بوده است.
+‌🏁 🇬🇧 ManotoTV
+
+🤖 @VahidOOnLine
+</div>
+
+## mwarmonitor — post 8854
+
+
+<div dir='rtl' style='font-family: "Vazirmatn", Tahoma, sans-serif;'>
+ما همین حالا موفق شدیم آزادی سه زندانی لهستانی و دو زندانی مولداویایی را از بازداشتگاه‌های بلاروس و روسیه تضمین کنیم. با تشکر از فرستاده ویژه ریاست‌جمهوری من، «جان کول»، ما توانستیم با فشار زیاد این آزادی را محقق کنیم.
+دوست من، کارول ناوروکی، رئیس‌جمهور لهستان، سپتامبر گذشته با من دیدار کرد و از من خواست تا برای آزادی «آندژی پوچوبوت» از زندان بلاروس کمک کنم. امروز، پوچوبوت به دلیل تلاش‌های ما آزاد است.
+ایالات متحده به وعده‌های خود در قبال متحدان و دوستانش عمل می‌کند. با تشکر از رئیس‌جمهور الکساندر لوکاشنکو برای همکاری و دوستی‌اش. بسیار عالی!
+
+رئیس‌جمهور دونالد جی. ترامپ
+
+@mwarmonitor
+</div>
+
+## pm_afshaa — post 90500
+
+
+<div dir='rtl' style='font-family: "Vazirmatn", Tahoma, sans-serif;'>
+🔴رسانه های اسرائیلی : نتانیاهو بعدِ تماس تلفنی، جلسه‌ای با کابینه امنیتی گذاشته‌
+
+
+💧 Rainbet.com the #1 Non-KYC Crypto Casino & Sportsbook @rainbetcom
+
+😁 @Pm_Afshaa
+</div>
+
+## pm_afshaa — post 90499
+
+
+<div dir='rtl' style='font-family: "Vazirmatn", Tahoma, sans-serif;'>
+🔴ترامپ : ایران 47 ساله داره با آمریکا و بقیه دنیا بازی درمیاره و هی وقت‌کشی می‌کنه 
+💧 Rainbet.com the #1 Non-KYC Crypto Casino & Sportsbook @rainbetcom 
+😁 @Pm_Afshaa
+</div>
+
+## pm_afshaa — post 90498
+
+
+<div dir='rtl' style='font-family: "Vazirmatn", Tahoma, sans-serif;'>
+🔴ترامپ : ایران 47 ساله داره با آمریکا و بقیه دنیا بازی درمیاره و هی وقت‌کشی می‌کنه
+
+
+💧 Rainbet.com the #1 Non-KYC Crypto Casino & Sportsbook @rainbetcom
+
+😁 @Pm_Afshaa
+</div>
+
+## pm_afshaa — post 90497
+
+
+<div dir='rtl' style='font-family: "Vazirmatn", Tahoma, sans-serif;'>
+🔴گفتگوی تلفنی میان نتانیاهو و ترامپ درباره پاسخ جمهوری اسلامی به به پیشنهاد تسلیم‌نامه هسته‌ای آمریکا به پایان رسید
+
+
+💧 Rainbet.com the #1 Non-KYC Crypto Casino & Sportsbook @rainbetcom
+
+😁 @Pm_Afshaa
+</div>
+
+## IranIntlTV — post 336529
+
+<div align="center">
+  <img src="telegram/content/IranIntlTV_336529_1778443958.jpg" alt="Photo">
+</div>
+<div dir='rtl' style='font-family: "Vazirmatn", Tahoma, sans-serif;'>
+رسانه‌های ایران شامگاه یک‌شنبه با اشاره به شنیده شدن فعالیت پدافند هوایی در اندیمشک و شمال دزفول از سرنگونی «پرنده متخاصم دشمن» در اندیمشک خبر دادند.
+
+شهروندان نیز یک‌شنبه ساعت حدود ۱۰ شب از شنیده‌شدن صدای پدافند در این شهر خبر دادند.
+https://iranintl.com/202605100082
+</div>
+
+## IranIntlTV — post 336528
+
+<div align="center">
+  <a href="telegram/content/IranIntlTV_336528_1778443959.mp4" target="_blank">🎬 Download video</a>
+</div>
+<div dir='rtl' style='font-family: "Vazirmatn", Tahoma, sans-serif;'>
+در پاسخ به فراخوان شاهزاده رضا پهلوی برای پیوستن به کارزار «یک ملت در گروگان»، گروهی از ایرانیان مقیم کانادا در تورنتو تجمع کردند.
+
+گزارش مهسا مرتضوی، خبرنگار ایران‌اینترنشنال
+@iranintltv
+</div>
+
+## Shin_Persian — post 5942
+
+<div align="center">
+  <img src="telegram/content/Shin_Persian_5942_1778443961.jpg" alt="Photo">
+</div>
+<div dir='rtl' style='font-family: "Vazirmatn", Tahoma, sans-serif;'>
+Shin ✓ @hey_itsmyturn Sun, 10 May 2026 20:10:37 UTC President Trump @POTUS: "Exclusive — Kurdish Leader: Trump Is ‘Master of the Deal,’ Can Land Major Deal to End Iran War and Create Worldwide Economic Boom: https://www.breitbart.com/politics/2026/05/10/exclusive…
+</div>
+
+## Shin_Persian — post 5941
+
+
+<div dir='rtl' style='font-family: "Vazirmatn", Tahoma, sans-serif;'>
+Shin ✓ @hey_itsmyturn
+Sun, 10 May 2026 20:10:37 UTC
+
+President Trump @POTUS:
+"Exclusive — Kurdish Leader: Trump Is ‘Master of the Deal,’ Can Land Major Deal to End Iran War and Create Worldwide Economic Boom: https://www.breitbart.com/politics/2026/05/10/exclusive-kurdish-leader-trump-is-master-of-the-deal-can-land-major-deal-to-end-iran-war-and-create-worldwide-economic-boom/"
+
+فارسی
+
+رئیس‌جمهور ترامپ @POTUS:
+
+«اختصاصی — رهبر کرد: ترامپ "استادِ معامله" است، او می‌تواند برای پایان دادن به جنگ ایران و ایجاد شکوفایی اقتصادی در سراسر جهان، به توافقی بزرگ دست یابد: https://www.breitbart.com/politics/2026/05/10/exclusive-kurdish-leader-trump-is-master-of-the-deal-can-land-major-deal-to-end-iran-war-and-create-worldwide-economic-boom/»
+
+𝕏 · @shin_persian
+</div>
+
+## Persian_Trend_Official — post 13855
+
+<div align="center">
+  <a href="telegram/content/Persian_Trend_Official_13855_1778443962.webm" target="_blank">🎬 Download video</a>
+</div>
+<div dir='rtl' style='font-family: "Vazirmatn", Tahoma, sans-serif;'>
+🔴سقوط یک «هدف متخاصم» توسط پدافند هوایی ایران در آسمان استان خوزستان در جنوب کشور گزارش شده است|نایا
+
+🫆:Tony
+
+📌 @persian_trend_official
+پرشین ترند | متفاوت‌ترین کانال نظامی
+</div>
+
+## RadioFarda — post 157039
+
+<div align="center">
+  <img src="telegram/content/RadioFarda_157039_1778443962.jpg" alt="Photo">
+</div>
+<div dir='rtl' style='font-family: "Vazirmatn", Tahoma, sans-serif;'>
+🔸مصطفی نیلی، وکیل دادگستری، روز یکشنبه خبر داد که نرگس محمدی، برنده جایزه صلح نوبل، برای طی کردن مراحل درمان به بیمارستانی در تهران منتقل شده است.
+
+🔸او در شبکه ایکس نوشت: «امروز خانم نرگس محمدی با صدور دستور توقف حکم برای انجام درمان از بیمارستان زنجان خارج و با آمبولانس به بیمارستان پارس تهران منتقل و بستری شدند.»
+
+🔸وکیل نرگس محمدی افزود که این اتفاق «در پی نظر پزشکی قانونی مبنی بر لزوم پیگیری درمان خارج از زندان و زیر نظر تیم پزشکان ایشان به دلیل بیماری‌های متعدد» رخ داد.
+
+🔸تقی رحمانی، فعال سیاسی و همسر خانم محمدی، نیز انتقال او به بیمارستان پارس تهران را با انتشار پیامی در شبکه ایکس تأیید کرد.
+
+🔸برنده ایرانی جایزه صلح نوبل که در زندان زنجان محبوس بود، روز ۱۱ اردیبهشت در پی وخامت حالش به بیمارستانی در این شهر منتقل شده بود.
+
+🔸خانواده و بنیاد نرگس محمدی از آن زمان با اشاره به وخیم‌تر شدن وضعیت جسمانی او، خواستار انتقالش به بیمارستانی در تهران و اجرای روند درمان توسط پزشکان معتمد شده بودند.
+
+@RadioFarda
+</div>
+
+## IranianMinds — post 19917
+
+
+<div dir='rtl' style='font-family: "Vazirmatn", Tahoma, sans-serif;'>
+ترامپ:
+
+تمام سازمان‌های فدرال باید کالای آمریکایی بخرند — هیچ بهانه‌ای پذیرفته نیست!
+
+@IranianMinds
+</div>
+
+## Dirty_Kids — post 389239
+
+
+<div dir='rtl' style='font-family: "Vazirmatn", Tahoma, sans-serif;'>
+وال‌استریت‌ژورنال در گزارش جدید خود به نقل از منابع آمریکایی نوشت: «پاسخ ایران، خواسته‌های آمریکا در مورد ذخایر اورانیوم غنی‌شده را نیز برآورده نمی‌کند. ایران پیشنهاد داده است که همزمان با رفع کامل تحریم‌های ایران از سوی آمریکا، گام به گام به درگیری‌ها پایان داده و تنگه هرمز را بازگشایی کند. حکومت ایران همچنین پیشنهاد داده است بخشی از اورانیوم غنی‌شده خود را رقیق کرده و مابقی را به کشوری غیر از آمریکا منتقل کند. حکومت ایران با توقف غنی‌سازی اورانیوم تا ۲۰ سال آینده نیز مخالفت کرده است. از سوی دیگر در پاسخ ایران، صراحتا با برچیدن تاسیسات هسته‌ای مخالفت شده است.»
+
+
+
+@Dirty_Kids 👻
+</div>
+
+## Dirty_Kids — post 389238
+
+
+<div dir='rtl' style='font-family: "Vazirmatn", Tahoma, sans-serif;'>
+نمیشه شهباز شریف رو بفرستیم رختکن بارسا درخواست کنه ازشون بازی همینجا تموم شه؟
+
+
+
+@Dirty_Kids 👻
+</div>
+
+## Dirty_Kids — post 389237
+
+
+<div dir='rtl' style='font-family: "Vazirmatn", Tahoma, sans-serif;'>
+اونجایی که ترامپ به عصر حجر برش گردونده رئال مادریده.
+
+
+
+@Dirty_Kids 👻
+</div>
+
+## alonews — post 119157
+
+<div align="center">
+  <a href="telegram/content/alonews_119157_1778443963.webm" target="_blank">🎬 Download video</a>
+</div>
+<div dir='rtl' style='font-family: "Vazirmatn", Tahoma, sans-serif;'>
+👈طبق گزارش آکسیوس، بنیامین نتانیاهو، نخست‌وزیر اسرائیل، از کنفراسی سران مقامات محلی دروزی و چرکسی در دریای مرده خارج شد و به شرکت‌کنندگان گفت که باید برای یک تماس فوری با دونالد ترامپ، رئیس‌جمهور آمریکا، به اورشلیم بازگردد.
+
+
+✅ @AloNews خبر جنگ
+</div>
+
+---
 📅 بروزرسانی: 1405/02/20 23:32
 ---
 
